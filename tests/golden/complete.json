@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "assessment": {
+    "id": "complete-network",
+    "name": "Complete declared network assessment",
+    "status": "COMPLETE"
+  },
+  "summary": {
+    "tools_scheduled": 1,
+    "tools_completed": 1,
+    "tools_incomplete": 0,
+    "tools_unknown": 0,
+    "required_checks": 1,
+    "completed_checks": 1,
+    "incomplete_checks": 0,
+    "unknown_checks": 0,
+    "reported_findings": 0
+  },
+  "runs": [
+    {
+      "id": "nmap-server",
+      "tool": "nmap",
+      "process": "COMPLETED",
+      "authentication": "NOT_REQUIRED",
+      "findings": 0,
+      "version": "7.95",
+      "declared_scan_type": "syn",
+      "requested_ports": "22,80,443",
+      "aggregate_port_states": {},
+      "automation_warnings": 0,
+      "statistics_present": false,
+      "planned_jobs": [],
+      "observed_targets": ["192.0.2.10"],
+      "observed_host_states": {
+        "192.0.2.10": "up"
+      },
+      "observed_routes": [],
+      "evidence_ids": ["ev-3a3d1587cc51d873"]
+    }
+  ],
+  "checks": [
+    {
+      "id": "nmap-ports",
+      "run_id": "nmap-server",
+      "kind": "tcp_port_scan",
+      "required": true,
+      "status": "COMPLETED",
+      "reason_code": "CHECK_COMPLETED",
+      "evidence_ids": [
+        "ev-3a3d1587cc51d873",
+        "ev-45b100189746a746",
+        "ev-4ba83fd4c9a1a1ea"
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "check_id": "nmap-ports",
+      "dimension": "tcp_ports",
+      "expected": 3,
+      "observed": 3,
+      "status": "COMPLETED",
+      "evidence_ids": [
+        "ev-3a3d1587cc51d873",
+        "ev-45b100189746a746",
+        "ev-4ba83fd4c9a1a1ea"
+      ]
+    }
+  ],
+  "limitations": [],
+  "artifacts": [
+    {
+      "run_id": "nmap-server",
+      "kind": "report",
+      "path": "evidence/nmap.xml",
+      "sha256": "21738adccb7554f8a374e3036cac872f4d1d689b330611839b2b54b84971d4c0"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-3a3d1587cc51d873",
+      "run_id": "nmap-server",
+      "category": "scanner_observation",
+      "source_artifact": "evidence/nmap.xml",
+      "locator": "/nmaprun",
+      "provenance": "NATIVE_REPORT",
+      "fact": "native completion Some(true); 1 targets; 3 explicit TCP port states",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-45b100189746a746",
+      "run_id": "nmap-server",
+      "category": "expected_check",
+      "source_artifact": "assessment_manifest",
+      "locator": "/checks/0",
+      "provenance": "USER_DECLARATION",
+      "fact": "required TcpPortScan check",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-4ba83fd4c9a1a1ea",
+      "run_id": "nmap-server",
+      "category": "check_outcome",
+      "source_artifact": "security-assessment-coverage-reporter",
+      "locator": "/checks/0",
+      "provenance": "DERIVED",
+      "fact": "status Completed; reason CHECK_COMPLETED",
+      "supporting_evidence_ids": ["ev-3a3d1587cc51d873", "ev-45b100189746a746"]
+    }
+  ],
+  "policy": {
+    "completeness": "pass",
+    "findings": "pass",
+    "status": "pass",
+    "reason_codes": []
+  }
+}

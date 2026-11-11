@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "assessment": {
+    "id": "complete-with-findings",
+    "name": "Complete authenticated assessment with findings",
+    "status": "COMPLETE"
+  },
+  "summary": {
+    "tools_scheduled": 1,
+    "tools_completed": 1,
+    "tools_incomplete": 0,
+    "tools_unknown": 0,
+    "required_checks": 2,
+    "completed_checks": 2,
+    "incomplete_checks": 0,
+    "unknown_checks": 0,
+    "reported_findings": 1
+  },
+  "runs": [
+    {
+      "id": "zap-web",
+      "tool": "zap",
+      "process": "COMPLETED",
+      "authentication": "VERIFIED_SUCCESS",
+      "findings": 1,
+      "version": "2.16.0",
+      "declared_scan_type": null,
+      "requested_ports": null,
+      "aggregate_port_states": {},
+      "automation_warnings": 0,
+      "statistics_present": false,
+      "planned_jobs": [],
+      "observed_targets": ["https://app.example.test"],
+      "observed_host_states": {},
+      "observed_routes": [],
+      "evidence_ids": [
+        "ev-7c4cc98beef1a7f2",
+        "ev-127511352d89fe96",
+        "ev-b2d3fc905127f1a9",
+        "ev-3c22914079cea78c",
+        "ev-8c6717a69c3c61ea"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "zap-auth",
+      "run_id": "zap-web",
+      "kind": "authentication",
+      "required": true,
+      "status": "COMPLETED",
+      "reason_code": "CHECK_COMPLETED",
+      "evidence_ids": [
+        "ev-7c4cc98beef1a7f2",
+        "ev-127511352d89fe96",
+        "ev-b2d3fc905127f1a9",
+        "ev-3c22914079cea78c",
+        "ev-8c6717a69c3c61ea",
+        "ev-e83a06c9d0de1256",
+        "ev-88f0725c444e58d3"
+      ]
+    },
+    {
+      "id": "zap-active",
+      "run_id": "zap-web",
+      "kind": "active_scan",
+      "required": true,
+      "status": "COMPLETED",
+      "reason_code": "CHECK_COMPLETED",
+      "evidence_ids": [
+        "ev-7c4cc98beef1a7f2",
+        "ev-127511352d89fe96",
+        "ev-b2d3fc905127f1a9",
+        "ev-3c22914079cea78c",
+        "ev-8c6717a69c3c61ea",
+        "ev-2516fdb3539f4e70",
+        "ev-c988249a4fc81f35"
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "check_id": "zap-auth",
+      "dimension": "authentication",
+      "expected": null,
+      "observed": null,
+      "status": "COMPLETED",
+      "evidence_ids": [
+        "ev-7c4cc98beef1a7f2",
+        "ev-127511352d89fe96",
+        "ev-b2d3fc905127f1a9",
+        "ev-3c22914079cea78c",
+        "ev-8c6717a69c3c61ea",
+        "ev-e83a06c9d0de1256",
+        "ev-88f0725c444e58d3"
+      ]
+    },
+    {
+      "check_id": "zap-active",
+      "dimension": "scan_stage",
+      "expected": null,
+      "observed": null,
+      "status": "COMPLETED",
+      "evidence_ids": [
+        "ev-7c4cc98beef1a7f2",
+        "ev-127511352d89fe96",
+        "ev-b2d3fc905127f1a9",
+        "ev-3c22914079cea78c",
+        "ev-8c6717a69c3c61ea",
+        "ev-2516fdb3539f4e70",
+        "ev-c988249a4fc81f35"
+      ]
+    }
+  ],
+  "limitations": [],
+  "artifacts": [
+    {
+      "run_id": "zap-web",
+      "kind": "execution",
+      "path": "evidence/execution.json",
+      "sha256": "e194be04ade0007a49c4733b46d9cdee5d7c7e85c9a1fb66705b1c0f54e0463a"
+    },
+    {
+      "run_id": "zap-web",
+      "kind": "verification",
+      "path": "evidence/verification.json",
+      "sha256": "aebd64dda977d10a77a17630cd6a4529e895f71b3824d6af2bb30035b48c9e0f"
+    },
+    {
+      "run_id": "zap-web",
+      "kind": "authentication",
+      "path": "evidence/zap-auth.json",
+      "sha256": "1bef260f89e8fe1f21d0b34ab9cb2011fb2ee9d0939f24cc46e35ff1edc981f0"
+    },
+    {
+      "run_id": "zap-web",
+      "kind": "report",
+      "path": "evidence/zap.json",
+      "sha256": "497f48131b3cbf494d2e3c402177b92e6b5f23cdb2e5399162aebab6a8ccb6f3"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-127511352d89fe96",
+      "run_id": "zap-web",
+      "category": "scanner_observation",
+      "source_artifact": "evidence/zap-auth.json",
+      "locator": "/summaryItems",
+      "provenance": "NATIVE_REPORT",
+      "fact": "tool authentication success true; failure false",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-2516fdb3539f4e70",
+      "run_id": "zap-web",
+      "category": "expected_check",
+      "source_artifact": "assessment_manifest",
+      "locator": "/checks/1",
+      "provenance": "USER_DECLARATION",
+      "fact": "required ActiveScan check",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-3c22914079cea78c",
+      "run_id": "zap-web",
+      "category": "stage_outcome",
+      "source_artifact": "evidence/execution.json",
+      "locator": "/stages/0/status",
+      "provenance": "RUNNER_ATTESTATION",
+      "fact": "check zap-active status Completed; selected templates 0; selected targets 0; observed routes 0",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-7c4cc98beef1a7f2",
+      "run_id": "zap-web",
+      "category": "scanner_observation",
+      "source_artifact": "evidence/zap.json",
+      "locator": "/site",
+      "provenance": "NATIVE_REPORT",
+      "fact": "1 reported alerts; automation errors false",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-88f0725c444e58d3",
+      "run_id": "zap-web",
+      "category": "check_outcome",
+      "source_artifact": "security-assessment-coverage-reporter",
+      "locator": "/checks/0",
+      "provenance": "DERIVED",
+      "fact": "status Completed; reason CHECK_COMPLETED",
+      "supporting_evidence_ids": [
+        "ev-7c4cc98beef1a7f2",
+        "ev-127511352d89fe96",
+        "ev-b2d3fc905127f1a9",
+        "ev-3c22914079cea78c",
+        "ev-8c6717a69c3c61ea",
+        "ev-e83a06c9d0de1256"
+      ]
+    },
+    {
+      "id": "ev-8c6717a69c3c61ea",
+      "run_id": "zap-web",
+      "category": "execution",
+      "source_artifact": "evidence/execution.json",
+      "locator": "/exit_code",
+      "provenance": "RUNNER_ATTESTATION",
+      "fact": "exit_code Some(0); timed_out false",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-b2d3fc905127f1a9",
+      "run_id": "zap-web",
+      "category": "authentication_verification",
+      "source_artifact": "evidence/verification.json",
+      "locator": "/authenticated_access",
+      "provenance": "RUNNER_ATTESTATION",
+      "fact": "authenticated_access true; unauthenticated_access false",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-c988249a4fc81f35",
+      "run_id": "zap-web",
+      "category": "check_outcome",
+      "source_artifact": "security-assessment-coverage-reporter",
+      "locator": "/checks/1",
+      "provenance": "DERIVED",
+      "fact": "status Completed; reason CHECK_COMPLETED",
+      "supporting_evidence_ids": [
+        "ev-7c4cc98beef1a7f2",
+        "ev-127511352d89fe96",
+        "ev-b2d3fc905127f1a9",
+        "ev-3c22914079cea78c",
+        "ev-8c6717a69c3c61ea",
+        "ev-2516fdb3539f4e70"
+      ]
+    },
+    {
+      "id": "ev-e83a06c9d0de1256",
+      "run_id": "zap-web",
+      "category": "expected_check",
+      "source_artifact": "assessment_manifest",
+      "locator": "/checks/0",
+      "provenance": "USER_DECLARATION",
+      "fact": "required Authentication check",
+      "supporting_evidence_ids": []
+    }
+  ],
+  "policy": {
+    "completeness": "pass",
+    "findings": "pass",
+    "status": "pass",
+    "reason_codes": []
+  }
+}

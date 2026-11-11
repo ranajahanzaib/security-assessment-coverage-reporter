@@ -1,0 +1,492 @@
+{
+  "schema_version": 1,
+  "assessment": {
+    "id": "zero-findings-incomplete",
+    "name": "Zero findings, incomplete assessment",
+    "status": "INCOMPLETE"
+  },
+  "summary": {
+    "tools_scheduled": 3,
+    "tools_completed": 2,
+    "tools_incomplete": 1,
+    "tools_unknown": 0,
+    "required_checks": 4,
+    "completed_checks": 2,
+    "incomplete_checks": 1,
+    "unknown_checks": 1,
+    "reported_findings": 0
+  },
+  "runs": [
+    {
+      "id": "nmap-server",
+      "tool": "nmap",
+      "process": "COMPLETED",
+      "authentication": "NOT_REQUIRED",
+      "findings": 0,
+      "version": "7.95",
+      "declared_scan_type": "syn",
+      "requested_ports": "22,80,443",
+      "aggregate_port_states": {},
+      "automation_warnings": 0,
+      "statistics_present": false,
+      "planned_jobs": [],
+      "observed_targets": ["192.0.2.10"],
+      "observed_host_states": {
+        "192.0.2.10": "up"
+      },
+      "observed_routes": [],
+      "evidence_ids": ["ev-3a3d1587cc51d873"]
+    },
+    {
+      "id": "nuclei-web",
+      "tool": "nuclei",
+      "process": "COMPLETED",
+      "authentication": "NOT_REQUIRED",
+      "findings": 0,
+      "version": null,
+      "declared_scan_type": null,
+      "requested_ports": null,
+      "aggregate_port_states": {},
+      "automation_warnings": 0,
+      "statistics_present": false,
+      "planned_jobs": [],
+      "observed_targets": [],
+      "observed_host_states": {},
+      "observed_routes": [],
+      "evidence_ids": [
+        "ev-63c68e0a56cf1a15",
+        "ev-b2e65cbd297700ea",
+        "ev-669584cf09ea1ec6"
+      ]
+    },
+    {
+      "id": "zap-web",
+      "tool": "zap",
+      "process": "FAILED",
+      "authentication": "FAILED",
+      "findings": 0,
+      "version": "2.16.0",
+      "declared_scan_type": null,
+      "requested_ports": null,
+      "aggregate_port_states": {},
+      "automation_warnings": 0,
+      "statistics_present": false,
+      "planned_jobs": [],
+      "observed_targets": ["https://app.example.test"],
+      "observed_host_states": {},
+      "observed_routes": [],
+      "evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "nmap-ports",
+      "run_id": "nmap-server",
+      "kind": "tcp_port_scan",
+      "required": true,
+      "status": "COMPLETED",
+      "reason_code": "CHECK_COMPLETED",
+      "evidence_ids": [
+        "ev-3a3d1587cc51d873",
+        "ev-45b100189746a746",
+        "ev-4ba83fd4c9a1a1ea"
+      ]
+    },
+    {
+      "id": "nuclei-selected-set",
+      "run_id": "nuclei-web",
+      "kind": "template_scan",
+      "required": true,
+      "status": "COMPLETED",
+      "reason_code": "CHECK_COMPLETED",
+      "evidence_ids": [
+        "ev-63c68e0a56cf1a15",
+        "ev-b2e65cbd297700ea",
+        "ev-669584cf09ea1ec6",
+        "ev-f939a92c713b3448",
+        "ev-7a6b39df4270d1c2"
+      ]
+    },
+    {
+      "id": "zap-auth",
+      "run_id": "zap-web",
+      "kind": "authentication",
+      "required": true,
+      "status": "FAILED",
+      "reason_code": "AUTHENTICATION_FAILED",
+      "evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e",
+        "ev-ee0c574b4e6a4beb",
+        "ev-f81f516d0963eddd"
+      ]
+    },
+    {
+      "id": "zap-active",
+      "run_id": "zap-web",
+      "kind": "active_scan",
+      "required": true,
+      "status": "UNKNOWN",
+      "reason_code": "DEPENDENCY_UNSATISFIED",
+      "evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e",
+        "ev-a056c3f261906f38",
+        "ev-fd2adcd711b25414"
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "check_id": "nmap-ports",
+      "dimension": "tcp_ports",
+      "expected": 3,
+      "observed": 3,
+      "status": "COMPLETED",
+      "evidence_ids": [
+        "ev-3a3d1587cc51d873",
+        "ev-45b100189746a746",
+        "ev-4ba83fd4c9a1a1ea"
+      ]
+    },
+    {
+      "check_id": "nuclei-selected-set",
+      "dimension": "selected_templates",
+      "expected": 1,
+      "observed": 1,
+      "status": "COMPLETED",
+      "evidence_ids": [
+        "ev-63c68e0a56cf1a15",
+        "ev-b2e65cbd297700ea",
+        "ev-669584cf09ea1ec6",
+        "ev-f939a92c713b3448",
+        "ev-7a6b39df4270d1c2"
+      ]
+    },
+    {
+      "check_id": "zap-auth",
+      "dimension": "authentication",
+      "expected": null,
+      "observed": null,
+      "status": "FAILED",
+      "evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e",
+        "ev-ee0c574b4e6a4beb",
+        "ev-f81f516d0963eddd"
+      ]
+    },
+    {
+      "check_id": "zap-active",
+      "dimension": "scan_stage",
+      "expected": null,
+      "observed": null,
+      "status": "UNKNOWN",
+      "evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e",
+        "ev-a056c3f261906f38",
+        "ev-fd2adcd711b25414"
+      ]
+    }
+  ],
+  "limitations": [
+    {
+      "reason_code": "TEMPLATE_EXECUTION_UNVERIFIED",
+      "explanation": "Selected template set was attested; per-template-per-target execution remains unverified.",
+      "run_id": "nuclei-web",
+      "check_id": "nuclei-selected-set",
+      "evidence_ids": [
+        "ev-63c68e0a56cf1a15",
+        "ev-b2e65cbd297700ea",
+        "ev-669584cf09ea1ec6",
+        "ev-f939a92c713b3448",
+        "ev-7a6b39df4270d1c2"
+      ],
+      "remediation": "Capture per-template-per-target execution evidence if that finer claim is required.",
+      "affects_required": false
+    },
+    {
+      "reason_code": "TOOL_EXECUTION_FAILED",
+      "explanation": "Scanner process did not complete successfully; individual check outcomes require separate evidence.",
+      "run_id": "zap-web",
+      "check_id": null,
+      "evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e"
+      ],
+      "remediation": "Repair the scanner run and capture execution and stage evidence.",
+      "affects_required": true
+    },
+    {
+      "reason_code": "DEPENDENCY_UNSATISFIED",
+      "explanation": "A prerequisite check is incomplete or unknown, so dependent coverage cannot be established.",
+      "run_id": "zap-web",
+      "check_id": "zap-active",
+      "evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e",
+        "ev-a056c3f261906f38",
+        "ev-fd2adcd711b25414"
+      ],
+      "remediation": "Repair the prerequisite check and rerun this dependent stage.",
+      "affects_required": true
+    },
+    {
+      "reason_code": "AUTHENTICATION_FAILED",
+      "explanation": "Authentication failed or the unauthenticated control gained access.",
+      "run_id": "zap-web",
+      "check_id": "zap-auth",
+      "evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e",
+        "ev-ee0c574b4e6a4beb",
+        "ev-f81f516d0963eddd"
+      ],
+      "remediation": "Repair authentication and rerun affected authenticated checks.",
+      "affects_required": true
+    }
+  ],
+  "artifacts": [
+    {
+      "run_id": "nmap-server",
+      "kind": "report",
+      "path": "evidence/nmap.xml",
+      "sha256": "21738adccb7554f8a374e3036cac872f4d1d689b330611839b2b54b84971d4c0"
+    },
+    {
+      "run_id": "nuclei-web",
+      "kind": "execution",
+      "path": "evidence/nuclei-execution.json",
+      "sha256": "18402bf68f99fef0abcb7ae02a472f941ef58106b8866b21e5b8ab6be931a0d0"
+    },
+    {
+      "run_id": "nuclei-web",
+      "kind": "findings",
+      "path": "evidence/nuclei.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "run_id": "zap-web",
+      "kind": "authentication",
+      "path": "evidence/zap-auth.json",
+      "sha256": "358121081c9e98acf239e13e29da5f39ac4c008942baa10e1581331849346320"
+    },
+    {
+      "run_id": "zap-web",
+      "kind": "execution",
+      "path": "evidence/zap-execution.json",
+      "sha256": "fbe4ecc95a46ce4b88115a3e65913ead812ff1e625c204c4b09e8ddad1546ad4"
+    },
+    {
+      "run_id": "zap-web",
+      "kind": "report",
+      "path": "evidence/zap.json",
+      "sha256": "c6349cd7d0de5dca1994542fa4857b009b7e179daf4995a9ed0d1859ca6a264b"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-0fe1083c8823900b",
+      "run_id": "zap-web",
+      "category": "scanner_observation",
+      "source_artifact": "evidence/zap.json",
+      "locator": "/site",
+      "provenance": "NATIVE_REPORT",
+      "fact": "0 reported alerts; automation errors false",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-3a3d1587cc51d873",
+      "run_id": "nmap-server",
+      "category": "scanner_observation",
+      "source_artifact": "evidence/nmap.xml",
+      "locator": "/nmaprun",
+      "provenance": "NATIVE_REPORT",
+      "fact": "native completion Some(true); 1 targets; 3 explicit TCP port states",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-45b100189746a746",
+      "run_id": "nmap-server",
+      "category": "expected_check",
+      "source_artifact": "assessment_manifest",
+      "locator": "/checks/0",
+      "provenance": "USER_DECLARATION",
+      "fact": "required TcpPortScan check",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-4ba83fd4c9a1a1ea",
+      "run_id": "nmap-server",
+      "category": "check_outcome",
+      "source_artifact": "security-assessment-coverage-reporter",
+      "locator": "/checks/0",
+      "provenance": "DERIVED",
+      "fact": "status Completed; reason CHECK_COMPLETED",
+      "supporting_evidence_ids": ["ev-3a3d1587cc51d873", "ev-45b100189746a746"]
+    },
+    {
+      "id": "ev-63c68e0a56cf1a15",
+      "run_id": "nuclei-web",
+      "category": "scanner_observation",
+      "source_artifact": "evidence/nuclei.jsonl",
+      "locator": "/",
+      "provenance": "NATIVE_REPORT",
+      "fact": "0 reported findings",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-669584cf09ea1ec6",
+      "run_id": "nuclei-web",
+      "category": "execution",
+      "source_artifact": "evidence/nuclei-execution.json",
+      "locator": "/exit_code",
+      "provenance": "RUNNER_ATTESTATION",
+      "fact": "exit_code Some(0); timed_out false",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-7a6b39df4270d1c2",
+      "run_id": "nuclei-web",
+      "category": "check_outcome",
+      "source_artifact": "security-assessment-coverage-reporter",
+      "locator": "/checks/1",
+      "provenance": "DERIVED",
+      "fact": "status Completed; reason CHECK_COMPLETED",
+      "supporting_evidence_ids": [
+        "ev-63c68e0a56cf1a15",
+        "ev-b2e65cbd297700ea",
+        "ev-669584cf09ea1ec6",
+        "ev-f939a92c713b3448"
+      ]
+    },
+    {
+      "id": "ev-87d82386e788e50e",
+      "run_id": "zap-web",
+      "category": "execution",
+      "source_artifact": "evidence/zap-execution.json",
+      "locator": "/exit_code",
+      "provenance": "RUNNER_ATTESTATION",
+      "fact": "exit_code Some(1); timed_out false",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-9681fab023ecb344",
+      "run_id": "zap-web",
+      "category": "scanner_observation",
+      "source_artifact": "evidence/zap-auth.json",
+      "locator": "/summaryItems",
+      "provenance": "NATIVE_REPORT",
+      "fact": "tool authentication success false; failure true",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-a056c3f261906f38",
+      "run_id": "zap-web",
+      "category": "expected_check",
+      "source_artifact": "assessment_manifest",
+      "locator": "/checks/3",
+      "provenance": "USER_DECLARATION",
+      "fact": "required ActiveScan check",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-adcbe523fae01d40",
+      "run_id": "zap-web",
+      "category": "stage_outcome",
+      "source_artifact": "evidence/zap-execution.json",
+      "locator": "/stages/0/status",
+      "provenance": "RUNNER_ATTESTATION",
+      "fact": "check zap-auth status Failed; selected templates 0; selected targets 0; observed routes 0",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-b2e65cbd297700ea",
+      "run_id": "nuclei-web",
+      "category": "stage_outcome",
+      "source_artifact": "evidence/nuclei-execution.json",
+      "locator": "/stages/0/status",
+      "provenance": "RUNNER_ATTESTATION",
+      "fact": "check nuclei-selected-set status Completed; selected templates 1; selected targets 1; observed routes 0",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-ee0c574b4e6a4beb",
+      "run_id": "zap-web",
+      "category": "expected_check",
+      "source_artifact": "assessment_manifest",
+      "locator": "/checks/2",
+      "provenance": "USER_DECLARATION",
+      "fact": "required Authentication check",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-f81f516d0963eddd",
+      "run_id": "zap-web",
+      "category": "check_outcome",
+      "source_artifact": "security-assessment-coverage-reporter",
+      "locator": "/checks/2",
+      "provenance": "DERIVED",
+      "fact": "status Failed; reason AUTHENTICATION_FAILED",
+      "supporting_evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e",
+        "ev-ee0c574b4e6a4beb"
+      ]
+    },
+    {
+      "id": "ev-f939a92c713b3448",
+      "run_id": "nuclei-web",
+      "category": "expected_check",
+      "source_artifact": "assessment_manifest",
+      "locator": "/checks/1",
+      "provenance": "USER_DECLARATION",
+      "fact": "required TemplateScan check",
+      "supporting_evidence_ids": []
+    },
+    {
+      "id": "ev-fd2adcd711b25414",
+      "run_id": "zap-web",
+      "category": "check_outcome",
+      "source_artifact": "security-assessment-coverage-reporter",
+      "locator": "/checks/3",
+      "provenance": "DERIVED",
+      "fact": "status Unknown; reason DEPENDENCY_UNSATISFIED",
+      "supporting_evidence_ids": [
+        "ev-0fe1083c8823900b",
+        "ev-9681fab023ecb344",
+        "ev-adcbe523fae01d40",
+        "ev-87d82386e788e50e",
+        "ev-a056c3f261906f38"
+      ]
+    }
+  ],
+  "policy": {
+    "completeness": "fail",
+    "findings": "pass",
+    "status": "fail",
+    "reason_codes": ["ASSESSMENT_NOT_COMPLETE"]
+  }
+}
