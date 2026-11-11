@@ -30,12 +30,16 @@
       "automation_warnings": 0,
       "statistics_present": false,
       "planned_jobs": [],
-      "observed_targets": ["192.0.2.10"],
+      "observed_targets": [
+        "192.0.2.10"
+      ],
       "observed_host_states": {
         "192.0.2.10": "up"
       },
       "observed_routes": [],
-      "evidence_ids": ["ev-3a3d1587cc51d873"]
+      "evidence_ids": [
+        "ev-3a3d1587cc51d873"
+      ]
     },
     {
       "id": "nuclei-web",
@@ -72,7 +76,9 @@
       "automation_warnings": 0,
       "statistics_present": false,
       "planned_jobs": [],
-      "observed_targets": ["https://app.example.test"],
+      "observed_targets": [
+        "https://app.example.test"
+      ],
       "observed_host_states": {},
       "observed_routes": [],
       "evidence_ids": [
@@ -277,7 +283,7 @@
       "run_id": "nuclei-web",
       "kind": "execution",
       "path": "evidence/nuclei-execution.json",
-      "sha256": "18402bf68f99fef0abcb7ae02a472f941ef58106b8866b21e5b8ab6be931a0d0"
+      "sha256": "cac4eaecc94d22c33d251b370b706b01fe24439fac4b0d8734d493d8daeb56d1"
     },
     {
       "run_id": "nuclei-web",
@@ -289,19 +295,19 @@
       "run_id": "zap-web",
       "kind": "authentication",
       "path": "evidence/zap-auth.json",
-      "sha256": "358121081c9e98acf239e13e29da5f39ac4c008942baa10e1581331849346320"
+      "sha256": "904567f32da5ff6819a4b1464014615cb20c3e783f5acfcd9684dffa159a8528"
     },
     {
       "run_id": "zap-web",
       "kind": "execution",
       "path": "evidence/zap-execution.json",
-      "sha256": "fbe4ecc95a46ce4b88115a3e65913ead812ff1e625c204c4b09e8ddad1546ad4"
+      "sha256": "880c2d6077a0974443dc6fa632b1e99150c91b8cc66b0175b6be4e19af91f1f0"
     },
     {
       "run_id": "zap-web",
       "kind": "report",
       "path": "evidence/zap.json",
-      "sha256": "c6349cd7d0de5dca1994542fa4857b009b7e179daf4995a9ed0d1859ca6a264b"
+      "sha256": "d3dfb1ef13f6914eedf91cd1c10bbde261f75d8a97d88b98a65cab00d7013ebf"
     }
   ],
   "evidence": [
@@ -343,7 +349,10 @@
       "locator": "/checks/0",
       "provenance": "DERIVED",
       "fact": "status Completed; reason CHECK_COMPLETED",
-      "supporting_evidence_ids": ["ev-3a3d1587cc51d873", "ev-45b100189746a746"]
+      "supporting_evidence_ids": [
+        "ev-3a3d1587cc51d873",
+        "ev-45b100189746a746"
+      ]
     },
     {
       "id": "ev-63c68e0a56cf1a15",
@@ -487,6 +496,8 @@
     "completeness": "fail",
     "findings": "pass",
     "status": "fail",
-    "reason_codes": ["ASSESSMENT_NOT_COMPLETE"]
+    "reason_codes": [
+      "ASSESSMENT_NOT_COMPLETE"
+    ]
   }
 }

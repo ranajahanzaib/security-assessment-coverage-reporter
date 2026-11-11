@@ -15,7 +15,10 @@
       "$ref": "#/$defs/Tool"
     },
     "exit_code": {
-      "type": ["integer", "null"],
+      "type": [
+        "integer",
+        "null"
+      ],
       "format": "int32"
     },
     "timed_out": {
@@ -23,15 +26,24 @@
       "default": false
     },
     "started_at": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "default": null
     },
     "finished_at": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "default": null
     },
     "termination_reason": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "default": null
     },
     "source": {
@@ -45,11 +57,20 @@
     }
   },
   "additionalProperties": false,
-  "required": ["schema_version", "run_id", "tool", "source"],
+  "required": [
+    "schema_version",
+    "run_id",
+    "tool",
+    "source"
+  ],
   "$defs": {
     "Tool": {
       "type": "string",
-      "enum": ["nmap", "zap", "nuclei"]
+      "enum": [
+        "nmap",
+        "zap",
+        "nuclei"
+      ]
     },
     "Stage": {
       "type": "object",
@@ -61,7 +82,10 @@
           "$ref": "#/$defs/Status"
         },
         "target": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "default": null
         },
         "selected_templates": {
@@ -87,7 +111,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["check_id", "status"]
+      "required": [
+        "check_id",
+        "status"
+      ]
     },
     "Status": {
       "type": "string",

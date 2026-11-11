@@ -82,11 +82,19 @@
         }
       },
       "additionalProperties": false,
-      "required": ["id", "name", "status"]
+      "required": [
+        "id",
+        "name",
+        "status"
+      ]
     },
     "Overall": {
       "type": "string",
-      "enum": ["COMPLETE", "INCOMPLETE", "INCONCLUSIVE"]
+      "enum": [
+        "COMPLETE",
+        "INCOMPLETE",
+        "INCONCLUSIVE"
+      ]
     },
     "Summary": {
       "type": "object",
@@ -171,13 +179,22 @@
           "minimum": 0
         },
         "version": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "declared_scan_type": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "requested_ports": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "aggregate_port_states": {
           "type": "object",
@@ -245,11 +262,21 @@
     },
     "Tool": {
       "type": "string",
-      "enum": ["nmap", "zap", "nuclei"]
+      "enum": [
+        "nmap",
+        "zap",
+        "nuclei"
+      ]
     },
     "Process": {
       "type": "string",
-      "enum": ["COMPLETED", "FAILED", "TIMED_OUT", "NOT_RUN", "UNKNOWN"]
+      "enum": [
+        "COMPLETED",
+        "FAILED",
+        "TIMED_OUT",
+        "NOT_RUN",
+        "UNKNOWN"
+      ]
     },
     "AuthenticationState": {
       "type": "string",
@@ -335,12 +362,18 @@
           "type": "string"
         },
         "expected": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "uint",
           "minimum": 0
         },
         "observed": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "uint",
           "minimum": 0
         },
@@ -355,7 +388,12 @@
         }
       },
       "additionalProperties": false,
-      "required": ["check_id", "dimension", "status", "evidence_ids"]
+      "required": [
+        "check_id",
+        "dimension",
+        "status",
+        "evidence_ids"
+      ]
     },
     "Limitation": {
       "type": "object",
@@ -370,7 +408,10 @@
           "type": "string"
         },
         "check_id": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "evidence_ids": {
           "type": "array",
@@ -412,7 +453,12 @@
         }
       },
       "additionalProperties": false,
-      "required": ["run_id", "kind", "path", "sha256"]
+      "required": [
+        "run_id",
+        "kind",
+        "path",
+        "sha256"
+      ]
     },
     "ArtifactKind": {
       "type": "string",
@@ -489,7 +535,12 @@
         }
       },
       "additionalProperties": false,
-      "required": ["completeness", "findings", "status", "reason_codes"]
+      "required": [
+        "completeness",
+        "findings",
+        "status",
+        "reason_codes"
+      ]
     }
   }
 }

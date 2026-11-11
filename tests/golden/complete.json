@@ -30,12 +30,16 @@
       "automation_warnings": 0,
       "statistics_present": false,
       "planned_jobs": [],
-      "observed_targets": ["192.0.2.10"],
+      "observed_targets": [
+        "192.0.2.10"
+      ],
       "observed_host_states": {
         "192.0.2.10": "up"
       },
       "observed_routes": [],
-      "evidence_ids": ["ev-3a3d1587cc51d873"]
+      "evidence_ids": [
+        "ev-3a3d1587cc51d873"
+      ]
     }
   ],
   "checks": [
@@ -105,7 +109,10 @@
       "locator": "/checks/0",
       "provenance": "DERIVED",
       "fact": "status Completed; reason CHECK_COMPLETED",
-      "supporting_evidence_ids": ["ev-3a3d1587cc51d873", "ev-45b100189746a746"]
+      "supporting_evidence_ids": [
+        "ev-3a3d1587cc51d873",
+        "ev-45b100189746a746"
+      ]
     }
   ],
   "policy": {

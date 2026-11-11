@@ -39,7 +39,13 @@
     }
   },
   "additionalProperties": false,
-  "required": ["schema_version", "assessment", "scope", "runs", "checks"],
+  "required": [
+    "schema_version",
+    "assessment",
+    "scope",
+    "runs",
+    "checks"
+  ],
   "$defs": {
     "Assessment": {
       "type": "object",
@@ -52,7 +58,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["id", "name"]
+      "required": [
+        "id",
+        "name"
+      ]
     },
     "Scope": {
       "type": "object",
@@ -68,11 +77,19 @@
         }
       },
       "additionalProperties": false,
-      "required": ["id", "kind", "value"]
+      "required": [
+        "id",
+        "kind",
+        "value"
+      ]
     },
     "ScopeKind": {
       "type": "string",
-      "enum": ["url", "ip", "host"]
+      "enum": [
+        "url",
+        "ip",
+        "host"
+      ]
     },
     "Run": {
       "type": "object",
@@ -97,11 +114,20 @@
         }
       },
       "additionalProperties": false,
-      "required": ["id", "tool", "scope_ids", "artifacts"]
+      "required": [
+        "id",
+        "tool",
+        "scope_ids",
+        "artifacts"
+      ]
     },
     "Tool": {
       "type": "string",
-      "enum": ["nmap", "zap", "nuclei"]
+      "enum": [
+        "nmap",
+        "zap",
+        "nuclei"
+      ]
     },
     "Artifact": {
       "type": "object",
@@ -114,7 +140,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["kind", "path"]
+      "required": [
+        "kind",
+        "path"
+      ]
     },
     "ArtifactKind": {
       "type": "string",
@@ -164,7 +193,11 @@
         }
       },
       "additionalProperties": false,
-      "required": ["id", "run_id", "kind"]
+      "required": [
+        "id",
+        "run_id",
+        "kind"
+      ]
     },
     "CheckKind": {
       "type": "string",
@@ -181,7 +214,10 @@
       "type": "object",
       "properties": {
         "ports": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "default": null
         },
         "expected_routes": {
@@ -192,7 +228,10 @@
           "default": []
         },
         "minimum_observed_routes": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "uint",
           "minimum": 0,
           "default": null
@@ -232,11 +271,18 @@
         }
       },
       "additionalProperties": false,
-      "required": ["on_incomplete", "on_inconclusive", "on_findings"]
+      "required": [
+        "on_incomplete",
+        "on_inconclusive",
+        "on_findings"
+      ]
     },
     "Action": {
       "type": "string",
-      "enum": ["fail", "ignore"]
+      "enum": [
+        "fail",
+        "ignore"
+      ]
     }
   }
 }

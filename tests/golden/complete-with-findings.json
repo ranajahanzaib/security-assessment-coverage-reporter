@@ -30,7 +30,9 @@
       "automation_warnings": 0,
       "statistics_present": false,
       "planned_jobs": [],
-      "observed_targets": ["https://app.example.test"],
+      "observed_targets": [
+        "https://app.example.test"
+      ],
       "observed_host_states": {},
       "observed_routes": [],
       "evidence_ids": [
@@ -118,25 +120,25 @@
       "run_id": "zap-web",
       "kind": "execution",
       "path": "evidence/execution.json",
-      "sha256": "e194be04ade0007a49c4733b46d9cdee5d7c7e85c9a1fb66705b1c0f54e0463a"
+      "sha256": "336c50baafeb4358d8640444b87a6dde999acad40fec3606d3cfd13f562cb1f1"
     },
     {
       "run_id": "zap-web",
       "kind": "verification",
       "path": "evidence/verification.json",
-      "sha256": "aebd64dda977d10a77a17630cd6a4529e895f71b3824d6af2bb30035b48c9e0f"
+      "sha256": "c0451e913f94faa7e84518b891d6d3eb2ffa98e98b7f48fecd4434060096f85c"
     },
     {
       "run_id": "zap-web",
       "kind": "authentication",
       "path": "evidence/zap-auth.json",
-      "sha256": "1bef260f89e8fe1f21d0b34ab9cb2011fb2ee9d0939f24cc46e35ff1edc981f0"
+      "sha256": "f1c2761b9eb70a632dbac7841d8cee5fd423682b42ba54081766c7339e02f374"
     },
     {
       "run_id": "zap-web",
       "kind": "report",
       "path": "evidence/zap.json",
-      "sha256": "497f48131b3cbf494d2e3c402177b92e6b5f23cdb2e5399162aebab6a8ccb6f3"
+      "sha256": "71433ce566f0d63390d869051ae277e664a14b243b592b0128466e8596d9773b"
     }
   ],
   "evidence": [
