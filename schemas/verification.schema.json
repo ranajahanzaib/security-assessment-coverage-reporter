@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Verification",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "protected_resource": {
+      "type": "string"
+    },
+    "authenticated_access": {
+      "type": "boolean"
+    },
+    "unauthenticated_access": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "target",
+    "protected_resource",
+    "authenticated_access",
+    "unauthenticated_access"
+  ]
+}

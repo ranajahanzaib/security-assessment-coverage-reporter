@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "run_id": "zap-web",
+  "tool": "zap",
+  "exit_code": 1,
+  "timed_out": false,
+  "source": "external_runner",
+  "stages": [{ "check_id": "zap-auth", "status": "FAILED" }]
+}

@@ -1,0 +1,31 @@
+schema_version: 1
+assessment:
+  id: complete-with-findings
+  name: Complete authenticated assessment with findings
+scope:
+  - id: application
+    kind: url
+    value: https://app.example.test
+runs:
+  - id: zap-web
+    tool: zap
+    scope_ids: [application]
+    artifacts:
+      - { kind: report, path: evidence/zap.json }
+      - { kind: authentication, path: evidence/zap-auth.json }
+      - { kind: verification, path: evidence/verification.json }
+      - { kind: execution, path: evidence/execution.json }
+checks:
+  - id: zap-auth
+    run_id: zap-web
+    kind: authentication
+    criteria:
+      requires_positive_verification: true
+  - id: zap-active
+    run_id: zap-web
+    kind: active_scan
+    depends_on: [zap-auth]
+policy:
+  on_incomplete: fail
+  on_inconclusive: fail
+  on_findings: ignore

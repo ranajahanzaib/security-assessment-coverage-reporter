@@ -1,0 +1,1 @@
+{"template-id":"example-check","host":"https://app.example.test","matched-at":"https://app.example.test","info":{"name":"Synthetic finding","severity":"info"},"request":"SYNTHETIC_REQUEST_BODY SCANRECEIPT_SYNTHETIC_SENTINEL"}

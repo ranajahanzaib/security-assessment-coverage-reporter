@@ -1,0 +1,10 @@
+{
+  "site": "https://app.example.test",
+  "summaryItems": [{ "key": "auth.summary.auth", "passed": false }],
+  "diagnostics": [
+    {
+      "redaction_canary": "SCANRECEIPT_SYNTHETIC_SENTINEL",
+      "steps": [{ "request": "SYNTHETIC_REQUEST_BODY" }]
+    }
+  ]
+}

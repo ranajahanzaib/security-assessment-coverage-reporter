@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Execution",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "tool": {
+      "$ref": "#/$defs/Tool"
+    },
+    "exit_code": {
+      "type": ["integer", "null"],
+      "format": "int32"
+    },
+    "timed_out": {
+      "type": "boolean",
+      "default": false
+    },
+    "started_at": {
+      "type": ["string", "null"],
+      "default": null
+    },
+    "finished_at": {
+      "type": ["string", "null"],
+      "default": null
+    },
+    "termination_reason": {
+      "type": ["string", "null"],
+      "default": null
+    },
+    "source": {
+      "type": "string"
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Stage"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "tool", "source"],
+  "$defs": {
+    "Tool": {
+      "type": "string",
+      "enum": ["nmap", "zap", "nuclei"]
+    },
+    "Stage": {
+      "type": "object",
+      "properties": {
+        "check_id": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "target": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "selected_templates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "selected_targets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "observed_routes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": false,
+      "required": ["check_id", "status"]
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "PARTIAL",
+        "FAILED",
+        "TIMED_OUT",
+        "SKIPPED",
+        "UNSUPPORTED",
+        "NOT_RUN",
+        "UNKNOWN"
+      ]
+    }
+  }
+}

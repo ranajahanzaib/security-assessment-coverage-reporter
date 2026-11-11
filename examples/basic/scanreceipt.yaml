@@ -1,0 +1,26 @@
+# Security Assessment Coverage Reporter starter. Replace scope and evidence paths with your own offline artifacts.
+schema_version: 1
+assessment:
+  id: example-assessment
+  name: Example assessment
+scope:
+  - id: server
+    kind: ip
+    value: 192.0.2.10
+runs:
+  - id: nmap-server
+    tool: nmap
+    scope_ids: [server]
+    artifacts:
+      - kind: report
+        path: evidence/nmap.xml
+checks:
+  - id: network-ports
+    run_id: nmap-server
+    kind: tcp_port_scan
+    criteria:
+      ports: "22,80,443"
+policy:
+  on_incomplete: fail
+  on_inconclusive: fail
+  on_findings: ignore

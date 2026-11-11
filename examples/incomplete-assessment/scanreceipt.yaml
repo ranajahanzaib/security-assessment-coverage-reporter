@@ -1,0 +1,61 @@
+schema_version: 1
+assessment:
+  id: zero-findings-incomplete
+  name: Zero findings, incomplete assessment
+scope:
+  - id: server
+    kind: ip
+    value: 192.0.2.10
+  - id: application
+    kind: url
+    value: https://app.example.test
+runs:
+  - id: nmap-server
+    tool: nmap
+    scope_ids: [server]
+    artifacts:
+      - kind: report
+        path: evidence/nmap.xml
+  - id: nuclei-web
+    tool: nuclei
+    scope_ids: [application]
+    artifacts:
+      - kind: findings
+        path: evidence/nuclei.jsonl
+      - kind: execution
+        path: evidence/nuclei-execution.json
+  - id: zap-web
+    tool: zap
+    scope_ids: [application]
+    artifacts:
+      - kind: report
+        path: evidence/zap.json
+      - kind: authentication
+        path: evidence/zap-auth.json
+      - kind: execution
+        path: evidence/zap-execution.json
+checks:
+  - id: nmap-ports
+    run_id: nmap-server
+    kind: tcp_port_scan
+    criteria:
+      ports: "22,80,443"
+  - id: nuclei-selected-set
+    run_id: nuclei-web
+    kind: template_scan
+    criteria:
+      expected_templates: [http/example-check]
+      expected_targets: [https://app.example.test]
+  - id: zap-auth
+    run_id: zap-web
+    kind: authentication
+    criteria:
+      requires_positive_verification: true
+  - id: zap-active
+    run_id: zap-web
+    kind: active_scan
+    depends_on: [zap-auth]
+policy:
+  on_incomplete: fail
+  on_inconclusive: fail
+  on_findings: ignore

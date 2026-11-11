@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Manifest",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0
+    },
+    "assessment": {
+      "$ref": "#/$defs/Assessment"
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Scope"
+      }
+    },
+    "runs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Run"
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Check"
+      }
+    },
+    "policy": {
+      "$ref": "#/$defs/Policy",
+      "default": {
+        "on_incomplete": "fail",
+        "on_inconclusive": "fail",
+        "on_findings": "ignore"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["schema_version", "assessment", "scope", "runs", "checks"],
+  "$defs": {
+    "Assessment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "name"]
+    },
+    "Scope": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ScopeKind"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "kind", "value"]
+    },
+    "ScopeKind": {
+      "type": "string",
+      "enum": ["url", "ip", "host"]
+    },
+    "Run": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "tool": {
+          "$ref": "#/$defs/Tool"
+        },
+        "scope_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Artifact"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "tool", "scope_ids", "artifacts"]
+    },
+    "Tool": {
+      "type": "string",
+      "enum": ["nmap", "zap", "nuclei"]
+    },
+    "Artifact": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ArtifactKind"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["kind", "path"]
+    },
+    "ArtifactKind": {
+      "type": "string",
+      "enum": [
+        "report",
+        "findings",
+        "statistics",
+        "execution",
+        "authentication",
+        "verification",
+        "plan"
+      ]
+    },
+    "Check": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/CheckKind"
+        },
+        "required": {
+          "type": "boolean",
+          "default": true
+        },
+        "criteria": {
+          "$ref": "#/$defs/Criteria",
+          "default": {
+            "ports": null,
+            "expected_routes": [],
+            "minimum_observed_routes": null,
+            "requires_positive_verification": false,
+            "expected_templates": [],
+            "expected_targets": []
+          }
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "run_id", "kind"]
+    },
+    "CheckKind": {
+      "type": "string",
+      "enum": [
+        "host_discovery",
+        "tcp_port_scan",
+        "authentication",
+        "route_discovery",
+        "active_scan",
+        "template_scan"
+      ]
+    },
+    "Criteria": {
+      "type": "object",
+      "properties": {
+        "ports": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "expected_routes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "minimum_observed_routes": {
+          "type": ["integer", "null"],
+          "format": "uint",
+          "minimum": 0,
+          "default": null
+        },
+        "requires_positive_verification": {
+          "type": "boolean",
+          "default": false
+        },
+        "expected_templates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "expected_targets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "on_incomplete": {
+          "$ref": "#/$defs/Action"
+        },
+        "on_inconclusive": {
+          "$ref": "#/$defs/Action"
+        },
+        "on_findings": {
+          "$ref": "#/$defs/Action"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["on_incomplete", "on_inconclusive", "on_findings"]
+    },
+    "Action": {
+      "type": "string",
+      "enum": ["fail", "ignore"]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "run_id": "zap-web",
+  "target": "https://app.example.test",
+  "protected_resource": "https://app.example.test/account",
+  "authenticated_access": true,
+  "unauthenticated_access": false
+}

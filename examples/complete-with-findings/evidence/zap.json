@@ -1,0 +1,10 @@
+{
+  "@version": "2.16.0",
+  "site": [
+    {
+      "@name": "https://app.example.test",
+      "alerts": [{ "pluginid": "40012", "alert": "Synthetic example finding" }]
+    }
+  ],
+  "afPlanErrors": []
+}

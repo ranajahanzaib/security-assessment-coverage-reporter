@@ -1,0 +1,4 @@
+{
+  "site": "https://app.example.test",
+  "summaryItems": [{ "key": "auth.summary.auth", "passed": true }]
+}

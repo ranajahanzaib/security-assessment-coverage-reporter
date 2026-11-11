@@ -1,0 +1,495 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Receipt",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0
+    },
+    "assessment": {
+      "$ref": "#/$defs/AssessmentReceipt"
+    },
+    "summary": {
+      "$ref": "#/$defs/Summary"
+    },
+    "runs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/RunResult"
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CheckResult"
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Coverage"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Limitation"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ArtifactDigest"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      }
+    },
+    "policy": {
+      "$ref": "#/$defs/PolicyResult"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment",
+    "summary",
+    "runs",
+    "checks",
+    "coverage",
+    "limitations",
+    "artifacts",
+    "evidence",
+    "policy"
+  ],
+  "$defs": {
+    "AssessmentReceipt": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/Overall"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "name", "status"]
+    },
+    "Overall": {
+      "type": "string",
+      "enum": ["COMPLETE", "INCOMPLETE", "INCONCLUSIVE"]
+    },
+    "Summary": {
+      "type": "object",
+      "properties": {
+        "tools_scheduled": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "tools_completed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "tools_incomplete": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "tools_unknown": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "required_checks": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "completed_checks": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "incomplete_checks": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "unknown_checks": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "reported_findings": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "tools_scheduled",
+        "tools_completed",
+        "tools_incomplete",
+        "tools_unknown",
+        "required_checks",
+        "completed_checks",
+        "incomplete_checks",
+        "unknown_checks",
+        "reported_findings"
+      ]
+    },
+    "RunResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "tool": {
+          "$ref": "#/$defs/Tool"
+        },
+        "process": {
+          "$ref": "#/$defs/Process"
+        },
+        "authentication": {
+          "$ref": "#/$defs/AuthenticationState"
+        },
+        "findings": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "version": {
+          "type": ["string", "null"]
+        },
+        "declared_scan_type": {
+          "type": ["string", "null"]
+        },
+        "requested_ports": {
+          "type": ["string", "null"]
+        },
+        "aggregate_port_states": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0
+          }
+        },
+        "automation_warnings": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0
+        },
+        "statistics_present": {
+          "type": "boolean"
+        },
+        "planned_jobs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "observed_targets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "observed_host_states": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "observed_routes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "tool",
+        "process",
+        "authentication",
+        "findings",
+        "aggregate_port_states",
+        "automation_warnings",
+        "statistics_present",
+        "planned_jobs",
+        "observed_targets",
+        "observed_host_states",
+        "observed_routes",
+        "evidence_ids"
+      ]
+    },
+    "Tool": {
+      "type": "string",
+      "enum": ["nmap", "zap", "nuclei"]
+    },
+    "Process": {
+      "type": "string",
+      "enum": ["COMPLETED", "FAILED", "TIMED_OUT", "NOT_RUN", "UNKNOWN"]
+    },
+    "AuthenticationState": {
+      "type": "string",
+      "enum": [
+        "NOT_REQUIRED",
+        "NOT_ATTEMPTED",
+        "FAILED",
+        "TOOL_REPORTED_SUCCESS",
+        "VERIFIED_SUCCESS",
+        "UNKNOWN"
+      ]
+    },
+    "CheckResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/CheckKind"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "reason_code": {
+          "type": "string"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "run_id",
+        "kind",
+        "required",
+        "status",
+        "reason_code",
+        "evidence_ids"
+      ]
+    },
+    "CheckKind": {
+      "type": "string",
+      "enum": [
+        "host_discovery",
+        "tcp_port_scan",
+        "authentication",
+        "route_discovery",
+        "active_scan",
+        "template_scan"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "PARTIAL",
+        "FAILED",
+        "TIMED_OUT",
+        "SKIPPED",
+        "UNSUPPORTED",
+        "NOT_RUN",
+        "UNKNOWN"
+      ]
+    },
+    "Coverage": {
+      "type": "object",
+      "properties": {
+        "check_id": {
+          "type": "string"
+        },
+        "dimension": {
+          "type": "string"
+        },
+        "expected": {
+          "type": ["integer", "null"],
+          "format": "uint",
+          "minimum": 0
+        },
+        "observed": {
+          "type": ["integer", "null"],
+          "format": "uint",
+          "minimum": 0
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["check_id", "dimension", "status", "evidence_ids"]
+    },
+    "Limitation": {
+      "type": "object",
+      "properties": {
+        "reason_code": {
+          "type": "string"
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "check_id": {
+          "type": ["string", "null"]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remediation": {
+          "type": "string"
+        },
+        "affects_required": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "reason_code",
+        "explanation",
+        "run_id",
+        "evidence_ids",
+        "remediation",
+        "affects_required"
+      ]
+    },
+    "ArtifactDigest": {
+      "type": "object",
+      "properties": {
+        "run_id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ArtifactKind"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["run_id", "kind", "path", "sha256"]
+    },
+    "ArtifactKind": {
+      "type": "string",
+      "enum": [
+        "report",
+        "findings",
+        "statistics",
+        "execution",
+        "authentication",
+        "verification",
+        "plan"
+      ]
+    },
+    "Evidence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "source_artifact": {
+          "type": "string"
+        },
+        "locator": {
+          "type": "string"
+        },
+        "provenance": {
+          "type": "string"
+        },
+        "fact": {
+          "type": "string"
+        },
+        "supporting_evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "run_id",
+        "category",
+        "source_artifact",
+        "locator",
+        "provenance",
+        "fact",
+        "supporting_evidence_ids"
+      ]
+    },
+    "PolicyResult": {
+      "type": "object",
+      "properties": {
+        "completeness": {
+          "type": "string"
+        },
+        "findings": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["completeness", "findings", "status", "reason_codes"]
+    }
+  }
+}

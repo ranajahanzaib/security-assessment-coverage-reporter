@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "run_id": "zap-web",
+  "tool": "zap",
+  "exit_code": 0,
+  "source": "external_runner",
+  "stages": [
+    {
+      "check_id": "zap-active",
+      "status": "COMPLETED",
+      "target": "https://app.example.test"
+    }
+  ]
+}

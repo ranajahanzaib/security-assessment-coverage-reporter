@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "run_id": "nuclei-web",
+  "tool": "nuclei",
+  "exit_code": 0,
+  "timed_out": false,
+  "source": "external_runner",
+  "stages": [
+    {
+      "check_id": "nuclei-selected-set",
+      "status": "COMPLETED",
+      "selected_templates": ["http/example-check"],
+      "selected_targets": ["https://app.example.test"]
+    }
+  ]
+}

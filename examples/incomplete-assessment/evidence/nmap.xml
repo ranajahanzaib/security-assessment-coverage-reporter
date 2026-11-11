@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<nmaprun scanner="nmap" version="7.95" xmloutputversion="1.05">
+  <scaninfo type="syn" protocol="tcp" services="22,80,443"/>
+  <host><status state="up"/><address addr="192.0.2.10" addrtype="ipv4"/>
+  <ports><port protocol="tcp" portid="22"><state state="closed"/></port><port protocol="tcp" portid="80"><state state="filtered"/></port><port protocol="tcp" portid="443"><state state="open"/></port></ports></host>
+  <runstats><finished exit="success"/><hosts up="1" down="0" total="1"/></runstats>
+</nmaprun>
