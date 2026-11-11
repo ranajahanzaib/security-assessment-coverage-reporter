@@ -1,9 +1,3 @@
-# Security Policy
+# Security policy
 
-## Reporting a Vulnerability
-
-Please do not report security vulnerabilities through public GitHub issues.
-
-Instead, report them via GitHub's private [Security Advisories](../../security/advisories/new) feature. Include as much detail as possible: a description of the issue, steps to reproduce, and potential impact.
-
-You can expect an acknowledgment within 48 hours and a resolution timeline once the issue is confirmed.
+Report vulnerabilities through [GitHub's private vulnerability reporting](https://github.com/ranajahanzaib/security-assessment-coverage-reporter/security/advisories/new). If private reporting is unavailable, email [work@withrana.com](mailto:work@withrana.com). Do not include scanner reports, credentials, or authentication diagnostics in a public issue. Include a minimal synthetic reproduction where possible.

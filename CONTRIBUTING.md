@@ -1,46 +1,19 @@
-## Contributing
+# Contributing
 
-We welcome contributions of all kinds to improve this project! Here's how you can get involved:
+Security Assessment Coverage Reporter is an offline assessment completeness auditor. Changes to scanner adapters must cite the native field's documented semantics and include positive and negative fixtures. Do not infer execution from zero findings, a scanner plan, or process exit alone.
 
-1. **Fork the Repository**: Start by forking the repository to your GitHub account.
+```sh
+cargo fmt --check
+cargo clippy --all-targets -- -D warnings
+cargo test --locked
+```
 
-2. **Clone Your Fork**: Clone the forked repository to your local machine:
+Golden receipts are intentional public contract snapshots. To regenerate one after reviewing a contract change:
 
-   ```bash
-   git clone <repo_url>
-   cd repo_dir
-   ```
+```sh
+cargo run -- analyze --manifest examples/incomplete-assessment/scanreceipt.yaml --out tests/golden/incomplete.json --quiet
+cargo run -- analyze --manifest examples/complete-assessment/scanreceipt.yaml --out tests/golden/complete.json --quiet
+cargo run -- analyze --manifest examples/complete-with-findings/scanreceipt.yaml --out tests/golden/complete-with-findings.json --quiet
+```
 
-3. **Create a Branch**: Create a new branch for your feature or bug fix:
-
-   ```bash
-   git checkout -b feature-name
-   ```
-
-4. **Make Changes**: Make your changes to the codebase. Be sure to follow existing code style and conventions.
-
-5. **Commit Changes**: Commit your changes with a clear and descriptive message:
-
-   ```bash
-   git commit -m "Add detailed description of the changes"
-   ```
-
-6. **Push Changes**: Push your changes to your fork:
-
-   ```bash
-   git push origin feature-name
-   ```
-
-7. **Submit a Pull Request**: Open a pull request from your branch to the main repository's branch. Include a detailed description of your changes and the problem they solve.
-
-8. **Review and Feedback**: Participate in the review process. Make any requested changes, and your contribution will be merged!
-
-### Guidelines
-
-- Ensure your code follows the existing style and conventions.
-- Include tests for any new functionality or bug fixes.
-- Write clear, concise commit messages and pull request descriptions.
-
-### Issues
-
-Feel free to report bugs or suggest enhancements by creating an issue. Be sure to include detailed information about the problem and, if possible, steps to reproduce it.
+Open an issue or pull request with the evidence semantics, compatibility scope, and any new limitations. Never commit real secrets or raw authentication diagnostics.
