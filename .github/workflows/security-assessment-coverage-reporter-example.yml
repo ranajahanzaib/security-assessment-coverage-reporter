@@ -1,0 +1,22 @@
+name: Security assessment coverage example
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  receipt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --locked
+      - name: Analyze checked-in scanner evidence
+        run: target/debug/security-assessment-coverage-reporter analyze --manifest examples/complete-assessment/scanreceipt.yaml --out assessment-receipt.json --html assessment-receipt.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: assessment-coverage-receipt
+          path: |
+            assessment-receipt.json
+            assessment-receipt.html
+      - name: Enforce declared completeness policy
+        run: target/debug/security-assessment-coverage-reporter check --receipt assessment-receipt.json
