@@ -84,7 +84,9 @@ fn run(cli: Cli) -> security_assessment_coverage_reporter::Result<u8> {
                     security_assessment_coverage_reporter::Error::Message(e.to_string())
                 })?;
             }
-            println!("Created {}", out.display());
+            if !cli.quiet {
+                println!("Created {}", out.display());
+            }
             Ok(0)
         }
         Command::Analyze {
@@ -131,7 +133,9 @@ fn run(cli: Cli) -> security_assessment_coverage_reporter::Result<u8> {
         }
         Command::Explain { receipt } => {
             let r = load_receipt(&receipt)?;
-            print!("{}", render::terminal(&r));
+            if !cli.quiet {
+                print!("{}", render::terminal(&r));
+            }
             Ok(0)
         }
         Command::Check { receipt } => {
@@ -141,7 +145,9 @@ fn run(cli: Cli) -> security_assessment_coverage_reporter::Result<u8> {
                     "unsupported receipt schema_version".into(),
                 ));
             }
-            println!("CI policy: {}", r.policy.status);
+            if !cli.quiet {
+                println!("CI policy: {}", r.policy.status);
+            }
             Ok(if r.policy.status == "pass" { 0 } else { 2 })
         }
         Command::Schema { name, out } => {
@@ -213,7 +219,9 @@ fn run(cli: Cli) -> security_assessment_coverage_reporter::Result<u8> {
             fs::write(out_dir.join("assessment-receipt.html"), render::html(&r)).map_err(|e| {
                 security_assessment_coverage_reporter::Error::Message(e.to_string())
             })?;
-            print!("{}", render::terminal(&r));
+            if !cli.quiet {
+                print!("{}", render::terminal(&r));
+            }
             Ok(0)
         }
     }

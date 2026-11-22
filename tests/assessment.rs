@@ -597,3 +597,110 @@ fn nmap_rejects_excessive_xml_nesting_and_duplicate_finish() {
     let duplicate = b"<nmaprun scanner=\"nmap\"><runstats><finished exit=\"success\"/><finished exit=\"error\"/></runstats></nmaprun>";
     assert!(adapters::parse(&Tool::Nmap, &ArtifactKind::Report, duplicate).is_err());
 }
+
+#[test]
+fn cli_flags_and_subcommands_behave_consistently() {
+    let bin = env!("CARGO_BIN_EXE_security-assessment-coverage-reporter");
+
+    // 1. check with incomplete receipt: exits 2, emits "CI policy: fail", quiet suppresses output
+    let out = std::process::Command::new(bin)
+        .args(["check", "--receipt", "tests/golden/incomplete.json"])
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(2));
+    assert!(String::from_utf8_lossy(&out.stdout).contains("CI policy: fail"));
+
+    let out_quiet = std::process::Command::new(bin)
+        .args([
+            "check",
+            "--receipt",
+            "tests/golden/incomplete.json",
+            "--quiet",
+        ])
+        .output()
+        .unwrap();
+    assert_eq!(out_quiet.status.code(), Some(2));
+    assert!(out_quiet.stdout.is_empty());
+
+    // 2. check with complete receipt: exits 0, emits "CI policy: pass", quiet suppresses output
+    let out = std::process::Command::new(bin)
+        .args(["check", "--receipt", "tests/golden/complete.json"])
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(0));
+    assert!(String::from_utf8_lossy(&out.stdout).contains("CI policy: pass"));
+
+    let out_quiet = std::process::Command::new(bin)
+        .args([
+            "check",
+            "--receipt",
+            "tests/golden/complete.json",
+            "--quiet",
+        ])
+        .output()
+        .unwrap();
+    assert_eq!(out_quiet.status.code(), Some(0));
+    assert!(out_quiet.stdout.is_empty());
+
+    // 3. validate: exits 0, emits "Manifest valid", quiet suppresses output
+    let out = std::process::Command::new(bin)
+        .args(["validate", "--manifest", "examples/basic/scanreceipt.yaml"])
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(0));
+    assert!(String::from_utf8_lossy(&out.stdout).contains("Manifest valid"));
+
+    let out_quiet = std::process::Command::new(bin)
+        .args([
+            "validate",
+            "--manifest",
+            "examples/basic/scanreceipt.yaml",
+            "--quiet",
+        ])
+        .output()
+        .unwrap();
+    assert_eq!(out_quiet.status.code(), Some(0));
+    assert!(out_quiet.stdout.is_empty());
+
+    // 4. init: exits 0, creates starter files, quiet suppresses output
+    let p1 = temp("cli-init-1");
+    let out1 = std::process::Command::new(bin)
+        .args([
+            "init",
+            "--out",
+            p1.join("scanreceipt.yaml").to_str().unwrap(),
+        ])
+        .output()
+        .unwrap();
+    assert_eq!(out1.status.code(), Some(0));
+    assert!(String::from_utf8_lossy(&out1.stdout).contains("Created"));
+    assert!(p1.join("scanreceipt.yaml").is_file());
+    fs::remove_dir_all(p1).unwrap();
+
+    let p2 = temp("cli-init-2");
+    let out2 = std::process::Command::new(bin)
+        .args([
+            "init",
+            "--out",
+            p2.join("scanreceipt.yaml").to_str().unwrap(),
+            "--quiet",
+        ])
+        .output()
+        .unwrap();
+    assert_eq!(out2.status.code(), Some(0));
+    assert!(out2.stdout.is_empty());
+    assert!(p2.join("scanreceipt.yaml").is_file());
+    fs::remove_dir_all(p2).unwrap();
+
+    // 5. demo: exits 0, creates files, quiet suppresses output
+    let d1 = temp("cli-demo-1").join("demo-out");
+    let out_demo = std::process::Command::new(bin)
+        .args(["demo", "--out-dir", d1.to_str().unwrap(), "--quiet"])
+        .output()
+        .unwrap();
+    assert_eq!(out_demo.status.code(), Some(0));
+    assert!(out_demo.stdout.is_empty());
+    assert!(d1.join("assessment-receipt.json").is_file());
+    assert!(d1.join("assessment-receipt.html").is_file());
+    fs::remove_dir_all(d1.parent().unwrap()).unwrap();
+}
